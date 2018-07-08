@@ -1,0 +1,67 @@
+buildscript {
+	repositories {
+		jcenter()
+
+		maven {
+			url "http://files.minecraftforge.net/maven"
+		}
+	}
+
+	dependencies {
+		classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
+	}
+}
+
+apply plugin: "net.minecraftforge.gradle.forge"
+
+version = "1.12.2-1.0.0.0"
+group = "com.therandomlabs.randompatches.integration"
+archivesBaseName = "rpintegration"
+
+sourceCompatibility = targetCompatibility = "1.8"
+
+compileJava {
+	sourceCompatibility = targetCompatibility = "1.8"
+}
+
+minecraft {
+	version = "1.12.2-latest"
+	runDir = "run"
+	mappings = "snapshot_20180707"
+
+	replace "@VERSION@", project.version
+	replace "@FINGERPRINT@", project.findProperty("signSHA1")
+}
+
+repositories {
+	maven {
+		url "https://jitpack.io"
+	}
+}
+
+dependencies {
+	deobfCompile "com.github.TheRandomLabs:RandomPatches:master-SNAPSHOT"
+	deobfCompile "com.github.Quetzi:Morpheus:master-SNAPSHOT"
+}
+
+jar {
+	manifest {
+		attributes "Manifest-Version": "1.0"
+		attributes "FMLCorePlugin": "com.therandomlabs.randompatches.integration.asm.RPICore"
+	}
+}
+
+task signJar(type: SignJar, dependsOn: reobfJar) {
+	onlyIf {
+		project.hasProperty("keyStore")
+	}
+
+	keyStore = project.findProperty("keyStore")
+	alias = project.findProperty("keyStoreAlias")
+	storePass = project.findProperty("keyStorePass")
+	keyPass = project.findProperty("keyStoreKeyPass")
+	inputFile = jar.archivePath
+	outputFile = jar.archivePath
+}
+
+build.dependsOn signJar

@@ -1,0 +1,8 @@
+rpintegration.config.misc=Miscellaneous
+rpintegration.config.misc.tooltip=Options that don't fit into any other categories.
+rpintegration.config.misc.morpheusSetSpawnMessagePatch=Morpheus set spawn message patch
+rpintegration.config.misc.rpireload=/rpireload
+rpintegration.config.misc.rpireloadclient=/rpireloadclient
+
+commands.rpireloadclient.usage=/rpireloadclient
+commands.rpireloadclient.sucess=RandomPatches Integration client-sided configuration reloaded!
