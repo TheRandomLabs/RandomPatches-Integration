@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import static com.therandomlabs.randompatches.asm.RPTransformer.register;
 
+@IFMLLoadingPlugin.SortingIndex(9000)
 @IFMLLoadingPlugin.MCVersion(RPIntegration.MC_VERSION)
 @IFMLLoadingPlugin.Name(RPIntegration.NAME)
 public class RPICore implements IFMLLoadingPlugin {
