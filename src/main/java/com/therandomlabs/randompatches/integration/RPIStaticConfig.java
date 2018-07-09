@@ -1,6 +1,6 @@
 package com.therandomlabs.randompatches.integration;
 
-import java.nio.file.Paths;
+import java.io.File;
 import com.therandomlabs.randompatches.RPStaticConfig;
 import net.minecraftforge.common.config.Configuration;
 import static com.therandomlabs.randompatches.RPStaticConfig.getBoolean;
@@ -31,7 +31,7 @@ public class RPIStaticConfig {
 
 	public static void reload() {
 		if(config == null) {
-			config = new Configuration(Paths.get("config", RPIntegration.MODID + ".cfg").toFile());
+			config = new Configuration(new File("config", RPIntegration.MODID + ".cfg"));
 		} else {
 			config.load();
 		}
@@ -47,5 +47,13 @@ public class RPIStaticConfig {
 				false);
 		rpireloadclient = getBoolean("rpireloadclient", "misc", Defaults.RPIRELOADCLIENT,
 				Comments.RPIRELOADCLIENT, false, true);
+
+		RPStaticConfig.removeOldProperties(config);
+		onReload();
+		config.save();
+	}
+
+	public static void onReload() {
+
 	}
 }

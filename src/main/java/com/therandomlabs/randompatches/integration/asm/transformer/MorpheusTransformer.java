@@ -16,7 +16,7 @@ public class MorpheusTransformer extends Transformer {
 			getName("net/minecraft/util/text/ITextComponent", "hh");
 
 	@Override
-	public boolean transform(ClassNode node) {
+	public void transform(ClassNode node) {
 		final MethodNode method = findMethod(node, "bedClicked");
 		LdcInsnNode messageString = null;
 
@@ -34,10 +34,6 @@ public class MorpheusTransformer extends Transformer {
 			}
 		}
 
-		if(messageString == null) {
-			return false;
-		}
-
 		final AbstractInsnNode createTextComponent = messageString.getNext();
 		final MethodInsnNode sendMessage = (MethodInsnNode) createTextComponent.getNext();
 
@@ -45,7 +41,5 @@ public class MorpheusTransformer extends Transformer {
 
 		sendMessage.name = SEND_STATUS_MESSAGE;
 		sendMessage.desc = "(L" + TEXT_COMPONENT + ";Z)V";
-
-		return true;
 	}
 }

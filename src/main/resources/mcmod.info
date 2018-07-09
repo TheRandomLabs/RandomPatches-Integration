@@ -1,0 +1,18 @@
+[
+	{
+		"modid": "rpintegration",
+		"name": "RandomPatches Integration",
+		"description": "An addon for RandomPatches that patches other mods.",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"url": "https://minecraft.curseforge.com/projects/randompatches-integration",
+		"updateJSON": "https://raw.githubusercontent.com/TheRandomLabs/RandomPatches-Integration/misc/versions.json",
+		"authorList": [
+			"TheRandomLabs"
+		],
+		"credits": "",
+		"logoFile": "assets/rpintegration/logo.png",
+		"screenshots": [],
+		"dependencies": []
+	}
+]

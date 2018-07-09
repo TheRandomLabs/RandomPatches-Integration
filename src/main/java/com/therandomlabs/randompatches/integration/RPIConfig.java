@@ -35,6 +35,7 @@ public class RPIConfig {
 			properties = RPConfig.getProperties(RPIConfig.class);
 		}
 
-		RPConfig.reload(properties, RPIntegration.MODID, RPIConfig.class, RPIStaticConfig.class);
+		RPConfig.reload(properties, RPIntegration.MODID, RPIConfig.class, RPIStaticConfig.class,
+				RPIStaticConfig::onReload);
 	}
 }
