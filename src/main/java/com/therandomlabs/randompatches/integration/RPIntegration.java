@@ -1,7 +1,5 @@
 package com.therandomlabs.randompatches.integration;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import com.google.common.eventbus.Subscribe;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,10 +16,6 @@ public final class RPIntegration {
 	public static final String MODID = "rpintegration";
 	public static final String NAME = "RandomPatches Integration";
 	public static final String VERSION = "@VERSION@";
-	public static final String LOGO_FILE = "assets/" + MODID + "/logo.png";
-	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/TheRandomLabs/" +
-			"RandomPatches-Integration/misc/versions.json";
-	public static final URL UPDATE_URL;
 
 	public static final String MC_VERSION = "1.12.2";
 	public static final String RANDOMPATCHES_MINIMUM_VERSION = "1.12.2-1.4.0.0";
@@ -29,16 +23,6 @@ public final class RPIntegration {
 			RANDOMPATCHES_MINIMUM_VERSION + ",)";
 
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
-
-	static {
-		URL url = null;
-
-		try {
-			url = new URL(UPDATE_JSON);
-		} catch(MalformedURLException ignored) {}
-
-		UPDATE_URL = url;
-	}
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {

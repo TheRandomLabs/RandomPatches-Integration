@@ -1,6 +1,7 @@
 package com.therandomlabs.randompatches.integration.asm;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import com.google.common.collect.ImmutableList;
@@ -29,7 +30,11 @@ public class RPICoreContainer extends DummyModContainer {
 
 	@Override
 	public URL getUpdateUrl() {
-		return RPIntegration.UPDATE_URL;
+		try {
+			return new URL(getMetadata().updateJSON);
+		} catch(MalformedURLException ignored) {}
+
+		return null;
 	}
 
 	@Override
