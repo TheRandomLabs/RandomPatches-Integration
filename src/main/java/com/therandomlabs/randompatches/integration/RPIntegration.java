@@ -19,8 +19,8 @@ public final class RPIntegration {
 
 	public static final String MC_VERSION = "1.12.2";
 	public static final String RANDOMPATCHES_MINIMUM_VERSION = "1.12.2-1.4.0.0";
-	public static final String RANDOMPATCHES_VERSION_RANGE = "[" +
-			RANDOMPATCHES_MINIMUM_VERSION + ",)";
+	public static final String RANDOMPATCHES_VERSION_RANGE =
+			"[" + RANDOMPATCHES_MINIMUM_VERSION + ",)";
 
 	public static final Logger LOGGER = LogManager.getLogger(MODID);
 
