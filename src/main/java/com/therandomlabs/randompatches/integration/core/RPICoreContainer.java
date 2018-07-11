@@ -1,4 +1,4 @@
-package com.therandomlabs.randompatches.integration.asm;
+package com.therandomlabs.randompatches.integration.core;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.EventBus;
-import com.therandomlabs.randompatches.asm.RPCoreContainer;
+import com.therandomlabs.randompatches.core.RPCoreContainer;
 import com.therandomlabs.randompatches.integration.RPIntegration;
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;

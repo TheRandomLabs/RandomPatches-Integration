@@ -1,20 +1,20 @@
-package com.therandomlabs.randompatches.integration.asm;
+package com.therandomlabs.randompatches.integration.core;
 
 import java.io.File;
 import java.util.Map;
 import com.therandomlabs.randompatches.RandomPatches;
-import com.therandomlabs.randompatches.asm.RPCore;
+import com.therandomlabs.randompatches.core.RPCore;
 import com.therandomlabs.randompatches.integration.RPIStaticConfig;
 import com.therandomlabs.randompatches.integration.RPIntegration;
-import com.therandomlabs.randompatches.integration.asm.transformer.MorpheusTransformer;
+import com.therandomlabs.randompatches.integration.core.transformer.MorpheusTransformer;
 import net.minecraftforge.fml.common.versioning.ArtifactVersion;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 import net.minecraftforge.fml.common.versioning.VersionParser;
 import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import static com.therandomlabs.randompatches.asm.RPTransformer.register;
+import static com.therandomlabs.randompatches.core.RPTransformer.register;
 
-@IFMLLoadingPlugin.SortingIndex(9000)
+@IFMLLoadingPlugin.SortingIndex(1001)
 @IFMLLoadingPlugin.MCVersion(RPIntegration.MC_VERSION)
 @IFMLLoadingPlugin.Name(RPIntegration.NAME)
 public class RPICore implements IFMLLoadingPlugin {
@@ -51,7 +51,7 @@ public class RPICore implements IFMLLoadingPlugin {
 	@Override
 	public String getModContainerClass() {
 		return randomPatchesInstalled ?
-				"com.therandomlabs.randompatches.integration.asm.RPICoreContainer" : null;
+				"com.therandomlabs.randompatches.integration.core.RPICoreContainer" : null;
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class RPICore implements IFMLLoadingPlugin {
 	public void injectData(Map<String, Object> data) {
 		if(randomPatchesInstalled) {
 			modFile = RPCore.getModFile(data, RPICore.class,
-					"com/therandomlabs/randompatches/integration/asm");
+					"com/therandomlabs/randompatches/integration/core");
 		}
 	}
 

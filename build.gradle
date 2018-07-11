@@ -37,11 +37,17 @@ repositories {
 	maven {
 		url "https://jitpack.io"
 	}
+
+	maven {
+		url "http://dvs1.progwml6.com/files/maven"
+	}
 }
 
 dependencies {
 	deobfCompile "com.github.TheRandomLabs:RandomPatches:master-SNAPSHOT"
 	deobfCompile "com.github.Quetzi:Morpheus:master-SNAPSHOT"
+	deobfProvided "mezz.jei:jei_1.12.2:4.11.0.204:api"
+	runtime "mezz.jei:jei_1.12.2:4.11.0.204:api"
 }
 
 processResources {
@@ -59,7 +65,7 @@ processResources {
 jar {
 	manifest {
 		attributes "Manifest-Version": "1.0"
-		attributes "FMLCorePlugin": "com.therandomlabs.randompatches.integration.asm.RPICore"
+		attributes "FMLCorePlugin": "com.therandomlabs.randompatches.integration.core.RPICore"
 	}
 }
 

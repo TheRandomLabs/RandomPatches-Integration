@@ -1,6 +1,6 @@
-package com.therandomlabs.randompatches.integration.asm.transformer;
+package com.therandomlabs.randompatches.integration.core.transformer;
 
-import com.therandomlabs.randompatches.asm.Transformer;
+import com.therandomlabs.randompatches.core.Transformer;
 import net.quetzi.morpheus.helpers.References;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
