@@ -11,10 +11,6 @@ import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
 public class MorpheusTransformer extends Transformer {
-	public static final String SEND_STATUS_MESSAGE = getName("sendStatusMessage", "a");
-	public static final String TEXT_COMPONENT =
-			getName("net/minecraft/util/text/ITextComponent", "hh");
-
 	@Override
 	public void transform(ClassNode node) {
 		final MethodNode method = findMethod(node, "bedClicked");
@@ -39,7 +35,7 @@ public class MorpheusTransformer extends Transformer {
 
 		method.instructions.insert(createTextComponent, new InsnNode(Opcodes.ICONST_1));
 
-		sendMessage.name = SEND_STATUS_MESSAGE;
-		sendMessage.desc = "(L" + TEXT_COMPONENT + ";Z)V";
+		sendMessage.name = getName("sendStatusMessage", "func_146105_b");
+		sendMessage.desc = "(Lnet/minecraft/util/text/ITextComponent;Z)V";
 	}
 }
