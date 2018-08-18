@@ -28,7 +28,7 @@ public class RPIConfig {
 	@Config.Comment(RPIStaticConfig.MISC_COMMENT)
 	public static Misc misc = new Misc();
 
-	private static Map<Object, Field> properties;
+	private static Map<Object, Field[]> properties;
 
 	public static void reload() {
 		if(properties == null) {
