@@ -18,7 +18,7 @@ public final class RPIntegration {
 	public static final String VERSION = "@VERSION@";
 
 	public static final String MC_VERSION = "1.12.2";
-	public static final String RANDOMPATCHES_MINIMUM_VERSION = "1.12.2-1.4.1.1";
+	public static final String RANDOMPATCHES_MINIMUM_VERSION = "1.12.2-1.5.0.0";
 	public static final String RANDOMPATCHES_VERSION_RANGE =
 			"[" + RANDOMPATCHES_MINIMUM_VERSION + ",)";
 
