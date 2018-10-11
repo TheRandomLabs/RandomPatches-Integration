@@ -2,8 +2,8 @@ package com.therandomlabs.randompatches.integration.core;
 
 import java.io.File;
 import java.util.Map;
+import com.therandomlabs.randompatches.RPUtils;
 import com.therandomlabs.randompatches.RandomPatches;
-import com.therandomlabs.randompatches.core.RPCore;
 import com.therandomlabs.randompatches.integration.RPIStaticConfig;
 import com.therandomlabs.randompatches.integration.RPIntegration;
 import com.therandomlabs.randompatches.integration.core.transformer.MorpheusTransformer;
@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import static com.therandomlabs.randompatches.core.RPTransformer.register;
 
-@IFMLLoadingPlugin.SortingIndex(1001)
+@IFMLLoadingPlugin.SortingIndex(RandomPatches.SORTING_INDEX - 1)
 @IFMLLoadingPlugin.MCVersion(RPIntegration.MC_VERSION)
 @IFMLLoadingPlugin.Name(RPIntegration.NAME)
 public class RPICore implements IFMLLoadingPlugin {
@@ -40,9 +40,10 @@ public class RPICore implements IFMLLoadingPlugin {
 			RPIStaticConfig.reload();
 			registerTransformers();
 		} else {
-			RPIntegration.LOGGER.error("RandomPatches %s or higher not found. " +
-					"RandomPatches Integration will be disabled.",
-					RPIntegration.RANDOMPATCHES_MINIMUM_VERSION);
+			RPIntegration.LOGGER.error(
+					"RandomPatches %s or higher not found. Disabling RandomPatches Integration...",
+					RPIntegration.RANDOMPATCHES_MINIMUM_VERSION
+			);
 		}
 
 		return new String[] {};
@@ -62,8 +63,9 @@ public class RPICore implements IFMLLoadingPlugin {
 	@Override
 	public void injectData(Map<String, Object> data) {
 		if(randomPatchesInstalled) {
-			modFile = RPCore.getModFile(data, RPICore.class,
-					"com/therandomlabs/randompatches/integration/core");
+			modFile = RPUtils.getModFile(
+					data, RPICore.class, "com/therandomlabs/randompatches/integration/core"
+			);
 		}
 	}
 
@@ -78,8 +80,7 @@ public class RPICore implements IFMLLoadingPlugin {
 
 	private static void registerTransformers() {
 		if(RPIStaticConfig.morpheusSetSpawnMessagePatch) {
-			register("net.quetzi.morpheus.helpers.MorpheusEventHandler",
-					new MorpheusTransformer());
+			register("net.quetzi.morpheus.helpers.MorpheusEventHandler", new MorpheusTransformer());
 		}
 	}
 }

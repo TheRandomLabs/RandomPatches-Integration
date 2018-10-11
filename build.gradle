@@ -32,7 +32,7 @@ repositories {
 
 dependencies {
 	deobfCompile "com.github.TheRandomLabs:RandomPatches:1.12-SNAPSHOT"
-	deobfCompile "com.github.Quetzi:Morpheus:master-SNAPSHOT"
+	deobfCompile "com.github.Quetzi:Morpheus:master-3cbed9ca9b-1"
 	deobfProvided "mezz.jei:jei_1.12.2:4.11.0.204:api"
 	runtime "mezz.jei:jei_1.12.2:4.11.0.204:api"
 }

@@ -40,13 +40,32 @@ public class RPIStaticConfig {
 
 		config.addCustomCategoryComment("misc", MISC_COMMENT);
 
-		morpheusSetSpawnMessagePatch = getBoolean("morpheusSetSpawnMessagePatch", "misc",
+		morpheusSetSpawnMessagePatch = getBoolean(
+				"morpheusSetSpawnMessagePatch",
+				"misc",
 				Defaults.MORPHEUS_SET_SPAWN_MESSAGE_PATCH,
-				Comments.MORPHEUS_SET_SPAWN_MESSAGE_PATCH, false, true);
-		rpireload = getBoolean("rpireload", "misc", Defaults.RPIRELOAD, Comments.RPIRELOAD, true,
-				false);
-		rpireloadclient = getBoolean("rpireloadclient", "misc", Defaults.RPIRELOADCLIENT,
-				Comments.RPIRELOADCLIENT, false, true);
+				Comments.MORPHEUS_SET_SPAWN_MESSAGE_PATCH,
+				false,
+				true
+		);
+
+		rpireload = getBoolean(
+				"rpireload",
+				"misc",
+				Defaults.RPIRELOAD,
+				Comments.RPIRELOAD,
+				true,
+				false
+		);
+
+		rpireloadclient = getBoolean(
+				"rpireloadclient",
+				"misc",
+				Defaults.RPIRELOADCLIENT,
+				Comments.RPIRELOADCLIENT,
+				false,
+				true
+		);
 
 		RPStaticConfig.removeOldProperties(config);
 		onReload();

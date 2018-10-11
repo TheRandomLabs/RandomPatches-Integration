@@ -1,40 +1,26 @@
 package com.therandomlabs.randompatches.integration.core;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.EventBus;
+import com.therandomlabs.randompatches.RPUtils;
 import com.therandomlabs.randompatches.core.RPCoreContainer;
 import com.therandomlabs.randompatches.integration.RPIntegration;
-import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.versioning.VersionRange;
 
-public class RPICoreContainer extends DummyModContainer {
+public class RPICoreContainer extends RPCoreContainer {
 	public RPICoreContainer() {
-		super(RPCoreContainer.loadMetadata(RPICore.getModFile(), RPIntegration.MODID,
-				RPIntegration.NAME, RPIntegration.VERSION));
+		super(RPUtils.loadMetadata(
+				RPICore.getModFile(), RPIntegration.MODID, RPIntegration.NAME, RPIntegration.VERSION
+		));
 	}
 
 	@Override
 	public File getSource() {
 		return RPICore.getModFile();
-	}
-
-	@Override
-	public Class<?> getCustomResourcePackClass() {
-		return RPCoreContainer.getResourcePackClass(this);
-	}
-
-	@Override
-	public URL getUpdateUrl() {
-		try {
-			return new URL(getMetadata().updateJSON);
-		} catch(MalformedURLException ignored) {}
-
-		return null;
 	}
 
 	@Override
@@ -47,5 +33,10 @@ public class RPICoreContainer extends DummyModContainer {
 	@Override
 	public List<String> getOwnedPackages() {
 		return ImmutableList.of("com.therandomlabs.randompatches.integration");
+	}
+
+	@Override
+	public VersionRange acceptableMinecraftVersionRange() {
+		return RPUtils.createVersionRange("[" + RPIntegration.MC_VERSION + "]");
 	}
 }

@@ -34,8 +34,9 @@ public class CommandRPIReload extends CommandBase {
 			throws CommandException {
 		if(server.isDedicatedServer()) {
 			RPIStaticConfig.reload();
-			notifyCommandListener(sender, this,
-					"RandomPatches Integration configuration reloaded!");
+			notifyCommandListener(
+					sender, this, "RandomPatches Integration configuration reloaded!"
+			);
 		} else {
 			RPIConfig.reload();
 			sender.sendMessage(new TextComponentTranslation("commands.rpireloadclient.sucess"));

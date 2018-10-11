@@ -28,14 +28,19 @@ public class RPIConfig {
 	@Config.Comment(RPIStaticConfig.MISC_COMMENT)
 	public static Misc misc = new Misc();
 
-	private static Map<Object, Field[]> properties;
+	private static Map<Object, Field[]> propertyCache;
 
 	public static void reload() {
-		if(properties == null) {
-			properties = RPConfig.getProperties(RPIConfig.class);
+		if(propertyCache == null) {
+			propertyCache = RPConfig.getProperties(RPIConfig.class);
 		}
 
-		RPConfig.reload(properties, RPIntegration.MODID, RPIConfig.class, RPIStaticConfig.class,
-				RPIStaticConfig::onReload);
+		RPConfig.reload(
+				propertyCache,
+				RPIntegration.MODID,
+				RPIConfig.class,
+				RPIStaticConfig.class,
+				RPIStaticConfig::onReload
+		);
 	}
 }

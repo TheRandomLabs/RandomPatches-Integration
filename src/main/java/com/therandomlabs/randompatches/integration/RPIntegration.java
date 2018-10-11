@@ -1,6 +1,7 @@
 package com.therandomlabs.randompatches.integration;
 
 import com.google.common.eventbus.Subscribe;
+import com.therandomlabs.randompatches.RandomPatches;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -18,7 +19,7 @@ public final class RPIntegration {
 	public static final String VERSION = "@VERSION@";
 
 	public static final String MC_VERSION = "1.12.2";
-	public static final String RANDOMPATCHES_MINIMUM_VERSION = "1.12.2-1.5.0.0";
+	public static final String RANDOMPATCHES_MINIMUM_VERSION = "1.12.2-1.6.0.0";
 	public static final String RANDOMPATCHES_VERSION_RANGE =
 			"[" + RANDOMPATCHES_MINIMUM_VERSION + ",)";
 
@@ -26,7 +27,7 @@ public final class RPIntegration {
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
-		if(RPIStaticConfig.rpireloadclient && event.getSide().equals(Side.CLIENT)) {
+		if(RPIStaticConfig.rpireloadclient && RandomPatches.IS_CLIENT) {
 			RPIConfig.reload();
 			ClientCommandHandler.instance.registerCommand(new CommandRPIReload(Side.CLIENT));
 		}
@@ -34,7 +35,7 @@ public final class RPIntegration {
 
 	@Subscribe
 	public void init(FMLInitializationEvent event) {
-		if(event.getSide().equals(Side.CLIENT)) {
+		if(RandomPatches.IS_CLIENT) {
 			MinecraftForge.EVENT_BUS.register(this);
 		}
 	}
