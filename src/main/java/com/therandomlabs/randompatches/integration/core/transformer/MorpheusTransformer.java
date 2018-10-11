@@ -23,6 +23,7 @@ public class MorpheusTransformer extends Transformer {
 				messageString = (LdcInsnNode) instruction;
 
 				if(References.SPAWN_SET.equals(messageString.cst)) {
+					messageString.cst = "Spawn point has been set";
 					break;
 				}
 
