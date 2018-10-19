@@ -1,5 +1,6 @@
 package com.therandomlabs.randompatches.integration;
 
+import com.therandomlabs.randompatches.RPConfig;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -38,7 +39,7 @@ public class CommandRPIReload extends CommandBase {
 					sender, this, "RandomPatches Integration configuration reloaded!"
 			);
 		} else {
-			RPIConfig.removeConfigForReloadFromDisk(RPIntegration.MODID);
+			RPConfig.removeConfigForReloadFromDisk(RPIntegration.MODID);
 			RPIConfig.reload();
 			sender.sendMessage(new TextComponentTranslation("commands.rpireloadclient.sucess"));
 		}
