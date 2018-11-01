@@ -17,9 +17,10 @@ public final class RPIntegration {
 	public static final String MODID = "rpintegration";
 	public static final String NAME = "RandomPatches Integration";
 	public static final String VERSION = "@VERSION@";
+	public static final String CERTIFICATE_FINGERPRINT = "@FINGERPRINT@";
 
 	public static final String MC_VERSION = "1.12.2";
-	public static final String RANDOMPATCHES_MINIMUM_VERSION = "1.12.2-1.6.1.0";
+	public static final String RANDOMPATCHES_MINIMUM_VERSION = "1.12.2-1.6.1.2";
 	public static final String RANDOMPATCHES_VERSION_RANGE =
 			"[" + RANDOMPATCHES_MINIMUM_VERSION + ",)";
 

@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.EventBus;
 import com.therandomlabs.randompatches.RPUtils;
 import com.therandomlabs.randompatches.core.RPCoreContainer;
+import com.therandomlabs.randompatches.integration.RPIEventHandler;
 import com.therandomlabs.randompatches.integration.RPIntegration;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.Loader;
@@ -16,6 +17,8 @@ public class RPICoreContainer extends RPCoreContainer {
 		super(RPUtils.loadMetadata(
 				RPICore.getModFile(), RPIntegration.MODID, RPIntegration.NAME, RPIntegration.VERSION
 		));
+
+		RPIEventHandler.containerInit();
 	}
 
 	@Override
