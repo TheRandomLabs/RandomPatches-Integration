@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public final class RPIntegration {
-	public static final String MODID = "rpintegration";
+	public static final String MOD_ID = "rpintegration";
 	public static final String NAME = "RandomPatches Integration";
 	public static final String VERSION = "@VERSION@";
 	public static final String CERTIFICATE_FINGERPRINT = "@FINGERPRINT@";
@@ -24,7 +24,7 @@ public final class RPIntegration {
 	public static final String RANDOMPATCHES_VERSION_RANGE =
 			"[" + RANDOMPATCHES_MINIMUM_VERSION + ",)";
 
-	public static final Logger LOGGER = LogManager.getLogger(MODID);
+	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
@@ -50,7 +50,7 @@ public final class RPIntegration {
 
 	@SubscribeEvent
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if(event.getModID().equals(MODID)) {
+		if(event.getModID().equals(MOD_ID)) {
 			RPIConfig.reload();
 		}
 	}

@@ -31,7 +31,7 @@ public class RPIStaticConfig {
 
 	public static void reload() {
 		if(config == null) {
-			config = new Configuration(new File("config", RPIntegration.MODID + ".cfg"));
+			config = new Configuration(new File("config", RPIntegration.MOD_ID + ".cfg"));
 		} else {
 			config.load();
 		}

@@ -15,7 +15,10 @@ import net.minecraftforge.fml.common.versioning.VersionRange;
 public class RPICoreContainer extends RPCoreContainer {
 	public RPICoreContainer() {
 		super(RPUtils.loadMetadata(
-				RPICore.getModFile(), RPIntegration.MODID, RPIntegration.NAME, RPIntegration.VERSION
+				RPICore.getModFile(),
+				RPIntegration.MOD_ID,
+				RPIntegration.NAME,
+				RPIntegration.VERSION
 		));
 
 		RPIEventHandler.containerInit();

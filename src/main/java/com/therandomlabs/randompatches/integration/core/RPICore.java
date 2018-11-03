@@ -29,7 +29,7 @@ public class RPICore implements IFMLLoadingPlugin {
 			final VersionRange range =
 					VersionParser.parseRange(RPIntegration.RANDOMPATCHES_VERSION_RANGE);
 			final ArtifactVersion version =
-					new DefaultArtifactVersion(RandomPatches.MODID, RandomPatches.VERSION);
+					new DefaultArtifactVersion(RandomPatches.MOD_ID, RandomPatches.VERSION);
 
 			if(range.containsVersion(version)) {
 				randomPatchesInstalled = true;

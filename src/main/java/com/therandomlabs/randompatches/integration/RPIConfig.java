@@ -5,7 +5,7 @@ import java.util.Map;
 import com.therandomlabs.randompatches.RPConfig;
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = RPIntegration.MODID, name = RPIntegration.MODID, category = "")
+@Config(modid = RPIntegration.MOD_ID, name = RPIntegration.MOD_ID, category = "")
 public class RPIConfig {
 	public static class Misc {
 		@Config.LangKey("rpintegration.config.misc.morpheusSetSpawnMessagePatch")
@@ -37,7 +37,7 @@ public class RPIConfig {
 
 		RPConfig.reload(
 				propertyCache,
-				RPIntegration.MODID,
+				RPIntegration.MOD_ID,
 				RPIConfig.class,
 				RPIStaticConfig.class,
 				RPIStaticConfig::onReload
