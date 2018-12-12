@@ -11,7 +11,7 @@ import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
-public class MorpheusEventHandlerPatch extends Patch {
+public final class MorpheusEventHandlerPatch extends Patch {
 	@Override
 	public void apply(ClassNode node) {
 		final MethodNode method = findMethod(node, "bedClicked");
