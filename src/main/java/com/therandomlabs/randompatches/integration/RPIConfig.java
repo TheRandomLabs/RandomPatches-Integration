@@ -17,7 +17,7 @@ public final class RPIConfig {
 	public static final class Misc {
 		@Config.LangKey("rpintegration.config.misc.morpheusSetSpawnMessage")
 		@Config.Comment(RPIStaticConfig.Comments.MORPHEUS_SET_SPAWN_MESSAGE)
-		public String morpheusSetSpawnMessagePatch =
+		public String morpheusSetSpawnMessage =
 				RPIStaticConfig.Defaults.MORPHEUS_SET_SPAWN_MESSAGE;
 
 		@Config.RequiresWorldRestart
