@@ -1,6 +1,6 @@
 package com.therandomlabs.randompatches.integration;
 
-import com.therandomlabs.randompatches.RPConfig;
+import com.therandomlabs.randompatches.config.RPConfig;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -21,11 +21,6 @@ public class CommandRPIReload extends CommandBase {
 	}
 
 	@Override
-	public int getRequiredPermissionLevel() {
-		return isClient ? 0 : 4;
-	}
-
-	@Override
 	public String getUsage(ICommandSender sender) {
 		return isClient ? "commands.rpireloadclient.usage" : "/rpireload";
 	}
@@ -33,7 +28,7 @@ public class CommandRPIReload extends CommandBase {
 	@Override
 	public void execute(MinecraftServer server, ICommandSender sender, String[] args)
 			throws CommandException {
-		if(server.isDedicatedServer()) {
+		if(server != null && server.isDedicatedServer()) {
 			RPIStaticConfig.reload();
 			notifyCommandListener(
 					sender, this, "RandomPatches Integration configuration reloaded!"
@@ -41,7 +36,12 @@ public class CommandRPIReload extends CommandBase {
 		} else {
 			RPConfig.removeConfigForReloadFromDisk(RPIntegration.MOD_ID);
 			RPIConfig.reload();
-			sender.sendMessage(new TextComponentTranslation("commands.rpireloadclient.sucess"));
+			sender.sendMessage(new TextComponentTranslation("commands.rpireloadclient.success"));
 		}
+	}
+
+	@Override
+	public int getRequiredPermissionLevel() {
+		return isClient ? 0 : 4;
 	}
 }

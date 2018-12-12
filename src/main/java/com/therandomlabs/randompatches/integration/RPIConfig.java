@@ -2,12 +2,19 @@ package com.therandomlabs.randompatches.integration;
 
 import java.lang.reflect.Field;
 import java.util.Map;
-import com.therandomlabs.randompatches.RPConfig;
+import com.therandomlabs.randompatches.config.RPConfig;
 import net.minecraftforge.common.config.Config;
 
 @Config(modid = RPIntegration.MOD_ID, name = RPIntegration.MOD_ID, category = "")
-public class RPIConfig {
-	public static class Misc {
+public final class RPIConfig {
+	public static final class Client {
+		@Config.RequiresMcRestart
+		@Config.LangKey("rpintegration.config.client.rpireloadclient")
+		@Config.Comment(RPIStaticConfig.Comments.RPIRELOADCLIENT)
+		public boolean rpireloadclient = RPIStaticConfig.Defaults.RPIRELOADCLIENT;
+	}
+
+	public static final class Misc {
 		@Config.LangKey("rpintegration.config.misc.morpheusSetSpawnMessagePatch")
 		@Config.Comment(RPIStaticConfig.Comments.MORPHEUS_SET_SPAWN_MESSAGE_PATCH)
 		public boolean morpheusSetSpawnMessagePatch =
@@ -17,16 +24,15 @@ public class RPIConfig {
 		@Config.LangKey("rpintegration.config.misc.rpireload")
 		@Config.Comment(RPIStaticConfig.Comments.RPIRELOAD)
 		public boolean rpireload = RPIStaticConfig.Defaults.RPIRELOAD;
-
-		@Config.RequiresWorldRestart
-		@Config.LangKey("rpintegration.config.misc.rpireloadclient")
-		@Config.Comment(RPIStaticConfig.Comments.RPIRELOADCLIENT)
-		public boolean rpireloadclient = RPIStaticConfig.Defaults.RPIRELOADCLIENT;
 	}
+
+	@Config.LangKey("rpintegration.config.client")
+	@Config.Comment(RPIStaticConfig.CLIENT_COMMENT)
+	public static final Client client = new Client();
 
 	@Config.LangKey("rpintegration.config.misc")
 	@Config.Comment(RPIStaticConfig.MISC_COMMENT)
-	public static Misc misc = new Misc();
+	public static final Misc misc = new Misc();
 
 	private static Map<Object, Field[]> propertyCache;
 

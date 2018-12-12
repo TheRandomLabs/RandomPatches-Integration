@@ -2,57 +2,26 @@ package com.therandomlabs.randompatches.integration.core;
 
 import java.io.File;
 import java.util.Map;
-import com.therandomlabs.randompatches.RPUtils;
 import com.therandomlabs.randompatches.RandomPatches;
-import com.therandomlabs.randompatches.integration.RPIStaticConfig;
 import com.therandomlabs.randompatches.integration.RPIntegration;
-import com.therandomlabs.randompatches.integration.core.transformer.MorpheusTransformer;
-import net.minecraftforge.fml.common.versioning.ArtifactVersion;
-import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
-import net.minecraftforge.fml.common.versioning.VersionParser;
-import net.minecraftforge.fml.common.versioning.VersionRange;
+import com.therandomlabs.randompatches.util.RPUtils;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import static com.therandomlabs.randompatches.core.RPTransformer.register;
 
 @IFMLLoadingPlugin.SortingIndex(RandomPatches.SORTING_INDEX - 1)
 @IFMLLoadingPlugin.MCVersion(RPIntegration.MC_VERSION)
 @IFMLLoadingPlugin.Name(RPIntegration.NAME)
 public class RPICore implements IFMLLoadingPlugin {
 	private static File modFile;
-	private static boolean randomPatchesInstalled;
 
 	@Override
 	public String[] getASMTransformerClass() {
-		try {
-			Class.forName("com.therandomlabs.randompatches.RandomPatches");
-
-			final VersionRange range =
-					VersionParser.parseRange(RPIntegration.RANDOMPATCHES_VERSION_RANGE);
-			final ArtifactVersion version =
-					new DefaultArtifactVersion(RandomPatches.MOD_ID, RandomPatches.VERSION);
-
-			if(range.containsVersion(version)) {
-				randomPatchesInstalled = true;
-			}
-		} catch(ClassNotFoundException ignored) {}
-
-		if(randomPatchesInstalled) {
-			RPIStaticConfig.reload();
-			registerTransformers();
-		} else {
-			RPIntegration.LOGGER.error(
-					"RandomPatches %s or higher not found. Disabling RandomPatches Integration...",
-					RPIntegration.RANDOMPATCHES_MINIMUM_VERSION
-			);
-		}
-
+		RPIntegration.init();
 		return new String[] {};
 	}
 
 	@Override
 	public String getModContainerClass() {
-		return randomPatchesInstalled ?
-				"com.therandomlabs.randompatches.integration.core.RPICoreContainer" : null;
+		return "com.therandomlabs.randompatches.integration.core.RPICoreContainer";
 	}
 
 	@Override
@@ -62,11 +31,9 @@ public class RPICore implements IFMLLoadingPlugin {
 
 	@Override
 	public void injectData(Map<String, Object> data) {
-		if(randomPatchesInstalled) {
-			modFile = RPUtils.getModFile(
-					data, RPICore.class, "com/therandomlabs/randompatches/integration/core"
-			);
-		}
+		modFile = RPUtils.getModFile(
+				data, RPICore.class, "com/therandomlabs/randompatches/integration/core"
+		);
 	}
 
 	@Override
@@ -76,11 +43,5 @@ public class RPICore implements IFMLLoadingPlugin {
 
 	public static File getModFile() {
 		return modFile;
-	}
-
-	private static void registerTransformers() {
-		if(RPIStaticConfig.morpheusSetSpawnMessagePatch) {
-			register("net.quetzi.morpheus.helpers.MorpheusEventHandler", new MorpheusTransformer());
-		}
 	}
 }

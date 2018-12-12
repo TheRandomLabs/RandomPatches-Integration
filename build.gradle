@@ -20,17 +20,6 @@ archivesBaseName = "rpintegration"
 
 sourceCompatibility = targetCompatibility = "1.8"
 
-repositories {
-	maven {
-		url "https://jitpack.io"
-	}
-}
-
-dependencies {
-	deobfCompile "com.github.TheRandomLabs:RandomPatches:1.12-SNAPSHOT"
-	deobfCompile "com.github.Quetzi:Morpheus:master-SNAPSHOT"
-}
-
 minecraft {
 	version = "1.12.2-latest"
 	runDir = "run"
@@ -70,6 +59,15 @@ task signJar(type: SignJar, dependsOn: reobfJar) {
 	keyPass = project.findProperty("keyStoreKeyPass")
 	inputFile = jar.archivePath
 	outputFile = jar.archivePath
+}
+
+task deobfJar(type: Jar) {
+	from sourceSets.main.output
+	classifier = "deobf"
+}
+
+artifacts {
+	archives deobfJar
 }
 
 build.dependsOn signJar

@@ -1,31 +1,33 @@
 package com.therandomlabs.randompatches.integration;
 
 import java.io.File;
-import com.therandomlabs.randompatches.RPStaticConfig;
+import com.therandomlabs.randompatches.config.RPStaticConfig;
 import net.minecraftforge.common.config.Configuration;
-import static com.therandomlabs.randompatches.RPStaticConfig.getBoolean;
+import static com.therandomlabs.randompatches.config.RPStaticConfig.getBoolean;
 
 public class RPIStaticConfig {
 	public static class Comments {
+		public static final String RPIRELOADCLIENT = "Enables the /rpireloadclient command.";
+
 		public static final String MORPHEUS_SET_SPAWN_MESSAGE_PATCH =
 				"Patches Morpheus so the spawn set message shows as a status message.";
-		public static final String RPIRELOAD = "Enables the /rpireload command. " +
-				"This option only takes effect after a world restart.";
-		public static final String RPIRELOADCLIENT = "Enables the /rpireloadclient command. " +
-				"This option only takes effect after a Minecraft restart.";
+		public static final String RPIRELOAD = "Enables the /rpireload command.";
 	}
 
 	public static class Defaults {
+		public static final boolean RPIRELOADCLIENT = true;
+
 		public static final boolean MORPHEUS_SET_SPAWN_MESSAGE_PATCH = true;
 		public static final boolean RPIRELOAD = true;
-		public static final boolean RPIRELOADCLIENT = true;
 	}
 
+	public static final String CLIENT_COMMENT = "Options related to client-sided features.";
 	public static final String MISC_COMMENT = "Options that don't fit into any other categories.";
+
+	public static boolean rpireloadclient;
 
 	public static boolean morpheusSetSpawnMessagePatch;
 	public static boolean rpireload;
-	public static boolean rpireloadclient;
 
 	private static Configuration config;
 
@@ -37,6 +39,17 @@ public class RPIStaticConfig {
 		}
 
 		RPStaticConfig.setCurrentConfig(config);
+
+		config.addCustomCategoryComment("client", CLIENT_COMMENT);
+
+		rpireloadclient = getBoolean(
+				"rpireloadclient",
+				"client",
+				Defaults.RPIRELOADCLIENT,
+				Comments.RPIRELOADCLIENT,
+				false,
+				true
+		);
 
 		config.addCustomCategoryComment("misc", MISC_COMMENT);
 
@@ -58,21 +71,10 @@ public class RPIStaticConfig {
 				false
 		);
 
-		rpireloadclient = getBoolean(
-				"rpireloadclient",
-				"misc",
-				Defaults.RPIRELOADCLIENT,
-				Comments.RPIRELOADCLIENT,
-				false,
-				true
-		);
-
 		RPStaticConfig.removeOldProperties(config);
 		onReload();
 		config.save();
 	}
 
-	public static void onReload() {
-
-	}
+	public static void onReload() {}
 }

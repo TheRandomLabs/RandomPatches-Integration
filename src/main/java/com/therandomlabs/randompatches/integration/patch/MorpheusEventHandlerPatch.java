@@ -1,6 +1,6 @@
-package com.therandomlabs.randompatches.integration.core.transformer;
+package com.therandomlabs.randompatches.integration.patch;
 
-import com.therandomlabs.randompatches.core.Transformer;
+import com.therandomlabs.randompatches.core.Patch;
 import net.quetzi.morpheus.helpers.References;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -10,9 +10,9 @@ import org.objectweb.asm.tree.LdcInsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 
-public class MorpheusTransformer extends Transformer {
+public class MorpheusEventHandlerPatch extends Patch {
 	@Override
-	public void transform(ClassNode node) {
+	public void apply(ClassNode node) {
 		final MethodNode method = findMethod(node, "bedClicked");
 		LdcInsnNode messageString = null;
 

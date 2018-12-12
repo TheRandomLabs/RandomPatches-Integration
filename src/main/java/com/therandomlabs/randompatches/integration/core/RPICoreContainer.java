@@ -4,10 +4,9 @@ import java.io.File;
 import java.util.List;
 import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.EventBus;
-import com.therandomlabs.randompatches.RPUtils;
 import com.therandomlabs.randompatches.core.RPCoreContainer;
-import com.therandomlabs.randompatches.integration.RPIEventHandler;
 import com.therandomlabs.randompatches.integration.RPIntegration;
+import com.therandomlabs.randompatches.util.RPUtils;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.versioning.VersionRange;
@@ -21,7 +20,7 @@ public class RPICoreContainer extends RPCoreContainer {
 				RPIntegration.VERSION
 		));
 
-		RPIEventHandler.containerInit();
+		RPIntegration.containerInit();
 	}
 
 	@Override
@@ -37,12 +36,12 @@ public class RPICoreContainer extends RPCoreContainer {
 	}
 
 	@Override
-	public List<String> getOwnedPackages() {
-		return ImmutableList.of("com.therandomlabs.randompatches.integration");
+	public VersionRange acceptableMinecraftVersionRange() {
+		return Loader.instance().getMinecraftModContainer().getStaticVersionRange();
 	}
 
 	@Override
-	public VersionRange acceptableMinecraftVersionRange() {
-		return RPUtils.createVersionRange("[" + RPIntegration.MC_VERSION + "]");
+	public List<String> getOwnedPackages() {
+		return ImmutableList.of("com.therandomlabs.randompatches.integration");
 	}
 }
