@@ -4,20 +4,25 @@ import java.io.File;
 import com.therandomlabs.randompatches.config.RPStaticConfig;
 import net.minecraftforge.common.config.Configuration;
 import static com.therandomlabs.randompatches.config.RPStaticConfig.getBoolean;
+import static com.therandomlabs.randompatches.config.RPStaticConfig.getString;
 
 public class RPIStaticConfig {
 	public static class Comments {
 		public static final String RPIRELOADCLIENT = "Enables the /rpireloadclient command.";
 
-		public static final String MORPHEUS_SET_SPAWN_MESSAGE_PATCH =
-				"Patches Morpheus so the spawn set message shows as a status message.";
+		public static final String MORPHEUS_SET_SPAWN_MESSAGE = "If this is not an empty string, " +
+				"RandomPatches Integration patches Morpheus so the spawn set message is replaced " +
+				"with this value and shows as a status message.";
+		public static final String REPLACE_TELEPORTER = "Whether to allow other mods " +
+				"(namely RandomPortals) to replace the default Teleporter.";
 		public static final String RPIRELOAD = "Enables the /rpireload command.";
 	}
 
 	public static class Defaults {
 		public static final boolean RPIRELOADCLIENT = true;
 
-		public static final boolean MORPHEUS_SET_SPAWN_MESSAGE_PATCH = true;
+		public static final String MORPHEUS_SET_SPAWN_MESSAGE = "Your spawn point has been set!";
+		public static final boolean REPLACE_TELEPORTER = true;
 		public static final boolean RPIRELOAD = true;
 	}
 
@@ -26,7 +31,8 @@ public class RPIStaticConfig {
 
 	public static boolean rpireloadclient;
 
-	public static boolean morpheusSetSpawnMessagePatch;
+	public static String morpheusSetSpawnMessage;
+	public static boolean replaceTeleporter;
 	public static boolean rpireload;
 
 	private static Configuration config;
@@ -53,11 +59,20 @@ public class RPIStaticConfig {
 
 		config.addCustomCategoryComment("misc", MISC_COMMENT);
 
-		morpheusSetSpawnMessagePatch = getBoolean(
-				"morpheusSetSpawnMessagePatch",
+		morpheusSetSpawnMessage = getString(
+				"morpheusSetSpawnMessage",
 				"misc",
-				Defaults.MORPHEUS_SET_SPAWN_MESSAGE_PATCH,
-				Comments.MORPHEUS_SET_SPAWN_MESSAGE_PATCH,
+				Defaults.MORPHEUS_SET_SPAWN_MESSAGE,
+				Comments.MORPHEUS_SET_SPAWN_MESSAGE,
+				false,
+				false
+		);
+
+		replaceTeleporter = getBoolean(
+				"replaceTeleporter",
+				"misc",
+				Defaults.REPLACE_TELEPORTER,
+				Comments.REPLACE_TELEPORTER,
 				false,
 				true
 		);

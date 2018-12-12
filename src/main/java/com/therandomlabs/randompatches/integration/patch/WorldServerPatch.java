@@ -1,6 +1,7 @@
 package com.therandomlabs.randompatches.integration.patch;
 
 import com.therandomlabs.randompatches.core.Patch;
+import com.therandomlabs.randompatches.integration.world.RPITeleporter;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
 import org.objectweb.asm.tree.ClassNode;
@@ -9,8 +10,7 @@ import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.TypeInsnNode;
 
 public final class WorldServerPatch extends Patch {
-	public static final String RANDOMPORTALS_TELEPORTER =
-			"com/therandomlabs/randomportals/world/RPOTeleporter";
+	public static final String RPITELEPORTER = getName(RPITeleporter.class);
 
 	@Override
 	public void apply(ClassNode node) {
@@ -45,7 +45,7 @@ public final class WorldServerPatch extends Patch {
 			}
 		}
 
-		createTeleporter.desc = RANDOMPORTALS_TELEPORTER;
-		initTeleporter.owner = RANDOMPORTALS_TELEPORTER;
+		createTeleporter.desc = RPITELEPORTER;
+		initTeleporter.owner = RPITELEPORTER;
 	}
 }

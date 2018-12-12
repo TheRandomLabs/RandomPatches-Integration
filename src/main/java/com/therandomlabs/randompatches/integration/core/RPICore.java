@@ -11,11 +11,16 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 @IFMLLoadingPlugin.MCVersion(RPIntegration.MC_VERSION)
 @IFMLLoadingPlugin.Name(RPIntegration.NAME)
 public class RPICore implements IFMLLoadingPlugin {
+	private static boolean initialized;
 	private static File modFile;
 
 	@Override
 	public String[] getASMTransformerClass() {
-		RPIntegration.init();
+		if(!initialized) {
+			RPIntegration.init();
+			initialized = true;
+		}
+
 		return new String[] {};
 	}
 

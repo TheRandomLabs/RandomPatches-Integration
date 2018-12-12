@@ -15,10 +15,10 @@ public final class RPIConfig {
 	}
 
 	public static final class Misc {
-		@Config.LangKey("rpintegration.config.misc.morpheusSetSpawnMessagePatch")
-		@Config.Comment(RPIStaticConfig.Comments.MORPHEUS_SET_SPAWN_MESSAGE_PATCH)
-		public boolean morpheusSetSpawnMessagePatch =
-				RPIStaticConfig.Defaults.MORPHEUS_SET_SPAWN_MESSAGE_PATCH;
+		@Config.LangKey("rpintegration.config.misc.morpheusSetSpawnMessage")
+		@Config.Comment(RPIStaticConfig.Comments.MORPHEUS_SET_SPAWN_MESSAGE)
+		public String morpheusSetSpawnMessagePatch =
+				RPIStaticConfig.Defaults.MORPHEUS_SET_SPAWN_MESSAGE;
 
 		@Config.RequiresWorldRestart
 		@Config.LangKey("rpintegration.config.misc.rpireload")

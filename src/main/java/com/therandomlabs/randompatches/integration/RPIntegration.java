@@ -26,12 +26,6 @@ public final class RPIntegration {
 	public static final String MC_VERSION = "1.12.2";
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
-	public static final boolean MORPHEUS_INSTALLED =
-			RPUtils.detect("net.quetzi.morpheus.Morpheus");
-
-	public static final boolean RANDOMPORTALS_INSTALLED =
-			RPUtils.detect("com.therandomlabs.randomportals.RandomPortals");
-
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		if(RPIStaticConfig.rpireloadclient && RandomPatches.IS_CLIENT) {
@@ -77,14 +71,14 @@ public final class RPIntegration {
 	}
 
 	private static void registerPatches() {
-		if(RPIntegration.MORPHEUS_INSTALLED && RPIStaticConfig.morpheusSetSpawnMessagePatch) {
+		if(!RPIStaticConfig.morpheusSetSpawnMessage.isEmpty()) {
 			register(
 					"net.quetzi.morpheus.helpers.MorpheusEventHandler",
 					new MorpheusEventHandlerPatch()
 			);
 		}
 
-		if(RPIntegration.RANDOMPORTALS_INSTALLED) {
+		if(RPIStaticConfig.replaceTeleporter) {
 			register("net.minecraft.world.WorldServer", new WorldServerPatch());
 		}
 	}

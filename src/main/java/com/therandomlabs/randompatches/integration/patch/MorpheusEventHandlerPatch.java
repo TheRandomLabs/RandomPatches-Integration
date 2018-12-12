@@ -1,6 +1,7 @@
 package com.therandomlabs.randompatches.integration.patch;
 
 import com.therandomlabs.randompatches.core.Patch;
+import com.therandomlabs.randompatches.integration.RPIStaticConfig;
 import net.quetzi.morpheus.helpers.References;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.AbstractInsnNode;
@@ -23,7 +24,7 @@ public class MorpheusEventHandlerPatch extends Patch {
 				messageString = (LdcInsnNode) instruction;
 
 				if(References.SPAWN_SET.equals(messageString.cst)) {
-					messageString.cst = "Spawn point has been set";
+					messageString.cst = RPIStaticConfig.morpheusSetSpawnMessage;
 					break;
 				}
 
