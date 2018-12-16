@@ -1,7 +1,7 @@
 {
 	"homepage": "https://minecraft.curseforge.com/projects/randompatches-integration",
 	"1.12.2": {
-		"1.12.2-1.1.0.0": "RandomPatches Integration now replaces the portal renderer.",
+		"1.12.2-1.1.0.0": "RandomPatches Integration now replaces the Nether portal renderer.",
 		"1.12.2-1.0.0.0": "Initial release."
 	},
 	"promos": {
