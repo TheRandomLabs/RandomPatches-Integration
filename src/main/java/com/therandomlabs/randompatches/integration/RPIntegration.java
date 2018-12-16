@@ -2,6 +2,7 @@ package com.therandomlabs.randompatches.integration;
 
 import com.google.common.eventbus.Subscribe;
 import com.therandomlabs.randompatches.RandomPatches;
+import com.therandomlabs.randompatches.integration.patch.GuiIngamePatch;
 import com.therandomlabs.randompatches.integration.patch.MorpheusEventHandlerPatch;
 import com.therandomlabs.randompatches.integration.patch.WorldServerPatch;
 import com.therandomlabs.randompatches.util.RPUtils;
@@ -71,6 +72,10 @@ public final class RPIntegration {
 	}
 
 	private static void registerPatches() {
+		if(RPIStaticConfig.replacePortalRenderer) {
+			register("net.minecraft.client.gui.GuiIngame", new GuiIngamePatch());
+		}
+
 		if(!RPIStaticConfig.morpheusSetSpawnMessage.isEmpty()) {
 			register(
 					"net.quetzi.morpheus.helpers.MorpheusEventHandler",
