@@ -13,6 +13,7 @@ import net.minecraft.init.Blocks;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.InsnList;
+import org.objectweb.asm.tree.InsnNode;
 import org.objectweb.asm.tree.MethodInsnNode;
 import org.objectweb.asm.tree.MethodNode;
 import org.objectweb.asm.tree.VarInsnNode;
@@ -48,9 +49,12 @@ public final class GuiIngamePatch extends Patch {
 				false
 		);
 
+		final InsnNode returnNothing = new InsnNode(Opcodes.RETURN);
+
 		instructions.add(loadTimeInPortal);
 		instructions.add(loadResolution);
 		instructions.add(callRenderPortal);
+		instructions.add(returnNothing);
 
 		method.instructions = instructions;
 	}
@@ -99,7 +103,7 @@ public final class GuiIngamePatch extends Patch {
 		buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
 		buffer.pos(0.0, height, -90.0).tex(minU, maxV).endVertex();
 		buffer.pos(width, height, -90.0).tex(maxU, maxV).endVertex();
-		buffer.pos(width, 0.0D, -90.0).tex(maxU, minV).endVertex();
+		buffer.pos(width, 0.0, -90.0).tex(maxU, minV).endVertex();
 		buffer.pos(0.0, 0.0, -90.0).tex(minU, minV).endVertex();
 
 		tessellator.draw();
