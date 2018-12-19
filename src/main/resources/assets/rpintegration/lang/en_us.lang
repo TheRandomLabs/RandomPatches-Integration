@@ -1,5 +1,6 @@
 rpintegration.config.client=Client-sided
 rpintegration.config.client.tooltip=Options related to client-sided features.
+rpintegration.config.client.replacePortalRenderer=Replace portal renderer
 rpintegration.config.client.rpireloadclient=/rpireloadclient
 
 rpintegration.config.misc=Miscellaneous

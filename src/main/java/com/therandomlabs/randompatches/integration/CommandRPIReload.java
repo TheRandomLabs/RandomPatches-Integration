@@ -34,7 +34,7 @@ public class CommandRPIReload extends CommandBase {
 					sender, this, "RandomPatches Integration configuration reloaded!"
 			);
 		} else {
-			RPConfig.removeConfigForReloadFromDisk(RPIntegration.MOD_ID);
+			RPConfig.prepareReloadFromDisk(RPIntegration.MOD_ID);
 			RPIConfig.reload();
 			sender.sendMessage(new TextComponentTranslation("commands.rpireloadclient.success"));
 		}

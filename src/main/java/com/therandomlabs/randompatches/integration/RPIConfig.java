@@ -1,7 +1,5 @@
 package com.therandomlabs.randompatches.integration;
 
-import java.lang.reflect.Field;
-import java.util.Map;
 import com.therandomlabs.randompatches.config.RPConfig;
 import net.minecraftforge.common.config.Config;
 
@@ -39,15 +37,8 @@ public final class RPIConfig {
 	@Config.Comment(RPIStaticConfig.MISC_COMMENT)
 	public static final Misc misc = new Misc();
 
-	private static Map<Object, Field[]> propertyCache;
-
 	public static void reload() {
-		if(propertyCache == null) {
-			propertyCache = RPConfig.getProperties(RPIConfig.class);
-		}
-
 		RPConfig.reload(
-				propertyCache,
 				RPIntegration.MOD_ID,
 				RPIConfig.class,
 				RPIStaticConfig.class,

@@ -9,6 +9,7 @@ import com.therandomlabs.randompatches.util.RPUtils;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -28,9 +29,15 @@ public final class RPIntegration {
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
 	@Subscribe
+	public void construct(FMLConstructionEvent event) {
+		if(RandomPatches.IS_CLIENT) {
+			RPIConfig.reload();
+		}
+	}
+
+	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		if(RPIStaticConfig.rpireloadclient && RandomPatches.IS_CLIENT) {
-			RPIConfig.reload();
 			ClientCommandHandler.instance.registerCommand(new CommandRPIReload(Side.CLIENT));
 		}
 	}
