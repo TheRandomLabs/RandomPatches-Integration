@@ -7,11 +7,6 @@ import net.minecraftforge.common.config.Config;
 public final class RPIConfig {
 	public static final class Client {
 		@Config.RequiresMcRestart
-		@Config.LangKey("rpintegration.config.client.replacePortalRenderer")
-		@Config.Comment(RPIStaticConfig.Comments.REPLACE_PORTAL_RENDERER)
-		public boolean replacePortalRenderer = RPIStaticConfig.Defaults.REPLACE_PORTAL_RENDERER;
-
-		@Config.RequiresMcRestart
 		@Config.LangKey("rpintegration.config.client.rpireloadclient")
 		@Config.Comment(RPIStaticConfig.Comments.RPIRELOADCLIENT)
 		public boolean rpireloadclient = RPIStaticConfig.Defaults.RPIRELOADCLIENT;

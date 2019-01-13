@@ -13,7 +13,7 @@ import org.objectweb.asm.tree.MethodNode;
 
 public final class MorpheusEventHandlerPatch extends Patch {
 	@Override
-	public void apply(ClassNode node) {
+	public boolean apply(ClassNode node) {
 		final MethodNode method = findMethod(node, "bedClicked");
 		LdcInsnNode messageString = null;
 
@@ -39,5 +39,7 @@ public final class MorpheusEventHandlerPatch extends Patch {
 
 		sendMessage.name = getName("sendStatusMessage", "func_146105_b");
 		sendMessage.desc = "(Lnet/minecraft/util/text/ITextComponent;Z)V";
+
+		return true;
 	}
 }
