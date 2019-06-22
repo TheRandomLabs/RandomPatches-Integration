@@ -1,17 +1,17 @@
 package com.therandomlabs.randompatches.integration;
 
 import com.google.common.eventbus.Subscribe;
+import com.therandomlabs.randomlib.TRLUtils;
+import com.therandomlabs.randomlib.config.CommandConfigReload;
+import com.therandomlabs.randomlib.config.ConfigManager;
 import com.therandomlabs.randompatches.RandomPatches;
+import com.therandomlabs.randompatches.integration.config.RPIConfig;
 import com.therandomlabs.randompatches.integration.patch.MorpheusEventHandlerPatch;
 import com.therandomlabs.randompatches.util.RPUtils;
 import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,42 +27,31 @@ public final class RPIntegration {
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
 	@Subscribe
-	public void construct(FMLConstructionEvent event) {
-		if(RandomPatches.IS_CLIENT) {
-			RPIConfig.reload();
-		}
-	}
-
-	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
-		if(RPIStaticConfig.rpireloadclient && RandomPatches.IS_CLIENT) {
-			ClientCommandHandler.instance.registerCommand(new CommandRPIReload(Side.CLIENT));
+		if(RPIConfig.Client.rpireloadclient && TRLUtils.IS_CLIENT) {
+			ClientCommandHandler.instance.registerCommand(new CommandConfigReload(
+					"rpireloadclient", RPIConfig.class, Side.CLIENT
+			));
 		}
 	}
 
 	@Subscribe
 	public void init(FMLInitializationEvent event) {
-		if(RandomPatches.IS_CLIENT) {
-			MinecraftForge.EVENT_BUS.register(this);
-		}
+		ConfigManager.registerEventHandler();
 	}
 
 	@Subscribe
 	public void serverStarting(FMLServerStartingEvent event) {
-		if(RPIStaticConfig.rpireload) {
-			event.registerServerCommand(new CommandRPIReload(Side.SERVER));
-		}
-	}
-
-	@SubscribeEvent
-	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-		if(event.getModID().equals(MOD_ID)) {
-			RPIConfig.reload();
+		if(RPIConfig.Misc.rpireload) {
+			event.registerServerCommand(new CommandConfigReload(
+					"rpireload", RPIConfig.class, Side.SERVER,
+					"RandomPatches Integration configuration reloaded!"
+			));
 		}
 	}
 
 	public static void init() {
-		RPIStaticConfig.reload();
+		ConfigManager.register(RPIConfig.class);
 		registerPatches();
 	}
 
@@ -77,7 +66,7 @@ public final class RPIntegration {
 	}
 
 	private static void registerPatches() {
-		if(!RPIStaticConfig.morpheusSetSpawnMessage.isEmpty()) {
+		if(!RPIConfig.Misc.morpheusSetSpawnMessage.isEmpty()) {
 			register(
 					"net.quetzi.morpheus.helpers.MorpheusEventHandler",
 					new MorpheusEventHandlerPatch()

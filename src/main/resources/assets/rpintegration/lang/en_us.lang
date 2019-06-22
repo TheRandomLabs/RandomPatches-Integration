@@ -1,9 +1,7 @@
 rpintegration.config.client=Client-sided
-rpintegration.config.client.tooltip=Options related to client-sided features.
 rpintegration.config.client.rpireloadclient=/rpireloadclient
 
 rpintegration.config.misc=Miscellaneous
-rpintegration.config.misc.tooltip=Options that don't fit into any other categories.
 rpintegration.config.misc.morpheusSetSpawnMessage=Morpheus set spawn message
 rpintegration.config.misc.rpireload=/rpireload
 
