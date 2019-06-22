@@ -7,11 +7,22 @@ import com.therandomlabs.randompatches.integration.RPIntegration;
 public final class RPIConfig {
 	public static final class Client {
 		@Config.RequiresMCRestart
+		@Config.Property("Whether to fix registry substitution with LiteLoader installed.")
+		public static boolean fixLiteLoaderRegistrySubstitution = true;
+
+		@Config.RequiresMCRestart
 		@Config.Property("Enables the /rpireloadclient command.")
 		public static boolean rpireloadclient = true;
 	}
 
 	public static final class Misc {
+		@Config.RequiresMCRestart
+		@Config.Property(
+				"Whether to fix Muon crashing when it cannot find a non-air block at an X and Z " +
+						"coordinate."
+		)
+		public static boolean fixMuonCrash = true;
+
 		@Config.Property({
 				"If this is not an empty string, RandomPatches Integration patches Morpheus " +
 						"so the spawn set message is replaced with this value and shows as a " +

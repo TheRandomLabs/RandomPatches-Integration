@@ -2,12 +2,11 @@ package com.therandomlabs.randompatches.integration.core;
 
 import java.io.File;
 import java.util.Map;
-import com.therandomlabs.randompatches.RandomPatches;
 import com.therandomlabs.randompatches.integration.RPIntegration;
 import com.therandomlabs.randompatches.util.RPUtils;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
-@IFMLLoadingPlugin.SortingIndex(RandomPatches.SORTING_INDEX - 1)
+@IFMLLoadingPlugin.SortingIndex(1001)
 @IFMLLoadingPlugin.MCVersion(RPIntegration.MC_VERSION)
 @IFMLLoadingPlugin.Name(RPIntegration.NAME)
 public class RPICore implements IFMLLoadingPlugin {

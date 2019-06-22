@@ -36,6 +36,9 @@ dependencies {
 	shadow "com.github.TheRandomLabs:RandomLib:1.12-SNAPSHOT"
 	compile "com.github.TheRandomLabs:RandomLib:1.12-SNAPSHOT"
 	deobfCompile "randompatches:randompatches:1.12.2:1.16.2.0"
+	//Apparently doesn't work:
+	//deobfCompile "morpheus:Morpheus:1.12.2:3.5.106"
+	deobfCompile "muon:muon:0.2:1.12"
 }
 
 shadowJar {
