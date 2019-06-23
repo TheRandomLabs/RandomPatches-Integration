@@ -92,7 +92,6 @@ public final class VillagePatch extends Patch {
 						final int height = found == null ? -1 : getHeight(found, x, z);
 
 						if(height != -1) {
-							// use modified terrain heights for possibly unbuilt chunks
 							y = Math.max(y, height);
 						} else {
 							BlockPos topBlock =
@@ -102,6 +101,7 @@ public final class VillagePatch extends Patch {
 							while(block == Blocks.AIR) {
 								topBlock = topBlock.down();
 
+								//This is our patch
 								if(topBlock.getY() < 0) {
 									break;
 								}
