@@ -14,7 +14,6 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import static com.therandomlabs.randompatches.core.RPTransformer.register;
@@ -35,8 +34,8 @@ public final class RPIntegration {
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		if(RPIConfig.Client.rpireloadclient && TRLUtils.IS_CLIENT) {
-			ClientCommandHandler.instance.registerCommand(new CommandConfigReload(
-					"rpireloadclient", RPIConfig.class, Side.CLIENT
+			ClientCommandHandler.instance.registerCommand(CommandConfigReload.client(
+					"rpireloadclient", RPIConfig.class
 			));
 		}
 	}
@@ -49,8 +48,8 @@ public final class RPIntegration {
 	@Subscribe
 	public void serverStarting(FMLServerStartingEvent event) {
 		if(RPIConfig.Misc.rpireload) {
-			event.registerServerCommand(new CommandConfigReload(
-					"rpireload", RPIConfig.class, Side.SERVER,
+			event.registerServerCommand(CommandConfigReload.server(
+					"rpireload", "rpireloadclient", RPIConfig.class,
 					"RandomPatches Integration configuration reloaded!"
 			));
 		}

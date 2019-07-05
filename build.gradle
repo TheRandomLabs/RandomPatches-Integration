@@ -16,7 +16,7 @@ buildscript {
 apply plugin: "net.minecraftforge.gradle.forge"
 apply plugin: "com.github.johnrengelman.shadow"
 
-version = "1.12.2-1.5.0.0"
+version = "1.12.2-1.5.1.0"
 group = "com.therandomlabs.randompatches.integration"
 archivesBaseName = "rpintegration"
 
@@ -35,7 +35,7 @@ repositories {
 dependencies {
 	shadow "com.github.TheRandomLabs:RandomLib:1.12-SNAPSHOT"
 	compile "com.github.TheRandomLabs:RandomLib:1.12-SNAPSHOT"
-	deobfCompile "randompatches:randompatches:1.12.2:1.16.2.0"
+	deobfCompile "randompatches:randompatches:1.12.2:1.17.2.0"
 	//Apparently doesn't work:
 	//deobfCompile "morpheus:Morpheus:1.12.2:3.5.106"
 	deobfCompile "muon:muon:0.2:1.12"
