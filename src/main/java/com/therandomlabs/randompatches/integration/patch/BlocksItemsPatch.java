@@ -9,8 +9,8 @@ import org.objectweb.asm.tree.FieldNode;
 public final class BlocksItemsPatch extends Patch {
 	@Override
 	public boolean apply(ClassNode classNode) {
-		for(FieldNode field : classNode.fields) {
-			if((field.access & 0x1F) == (Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC)) {
+		for (FieldNode field : classNode.fields) {
+			if ((field.access & 0x1F) == (Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC)) {
 				field.access = Opcodes.ACC_PUBLIC | Opcodes.ACC_STATIC | Opcodes.ACC_FINAL;
 			}
 		}

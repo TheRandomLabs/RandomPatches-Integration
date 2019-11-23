@@ -33,7 +33,7 @@ public final class RPIntegration {
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
-		if(RPIConfig.Client.rpireloadclient && TRLUtils.IS_CLIENT) {
+		if (RPIConfig.Client.rpireloadclient && TRLUtils.IS_CLIENT) {
 			ClientCommandHandler.instance.registerCommand(CommandConfigReload.client(
 					"rpireloadclient", RPIConfig.class
 			));
@@ -47,7 +47,7 @@ public final class RPIntegration {
 
 	@Subscribe
 	public void serverStarting(FMLServerStartingEvent event) {
-		if(RPIConfig.Misc.rpireload) {
+		if (RPIConfig.Misc.rpireload) {
 			event.registerServerCommand(CommandConfigReload.server(
 					"rpireload", "rpireloadclient", RPIConfig.class,
 					"RandomPatches Integration configuration reloaded!"
@@ -61,8 +61,8 @@ public final class RPIntegration {
 	}
 
 	public static void containerInit() {
-		if(!RPUtils.hasFingerprint(RPIntegration.class, CERTIFICATE_FINGERPRINT)) {
-			if(RandomPatches.IS_DEOBFUSCATED) {
+		if (!RPUtils.hasFingerprint(RPIntegration.class, CERTIFICATE_FINGERPRINT)) {
+			if (RandomPatches.IS_DEOBFUSCATED) {
 				LOGGER.debug("Invalid fingerprint detected!");
 			} else {
 				LOGGER.error("Invalid fingerprint detected!");
@@ -71,20 +71,20 @@ public final class RPIntegration {
 	}
 
 	private static void registerPatches() {
-		if(RPIConfig.Client.fixLiteLoaderRegistrySubstitution && LITELOADER_INSTALLED) {
+		if (RPIConfig.Client.fixLiteLoaderRegistrySubstitution && LITELOADER_INSTALLED) {
 			final BlocksItemsPatch patch = new BlocksItemsPatch();
 			register("net.minecraft.init.Blocks", patch);
 			register("net.minecraft.init.Items", patch);
 		}
 
-		if(RPIConfig.Misc.fixMuonCrash && MUON_INSTALLED) {
+		if (RPIConfig.Misc.fixMuonCrash && MUON_INSTALLED) {
 			register(
 					"net.minecraft.world.gen.structure.StructureVillagePieces$Village",
 					new VillagePatch()
 			);
 		}
 
-		if(!RPIConfig.Misc.morpheusSetSpawnMessage.isEmpty()) {
+		if (!RPIConfig.Misc.morpheusSetSpawnMessage.isEmpty()) {
 			register(
 					"net.quetzi.morpheus.helpers.MorpheusEventHandler",
 					new MorpheusEventHandlerPatch()

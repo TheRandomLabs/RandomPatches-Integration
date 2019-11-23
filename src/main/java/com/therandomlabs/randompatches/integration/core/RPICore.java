@@ -9,13 +9,14 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 @IFMLLoadingPlugin.SortingIndex(1001)
 @IFMLLoadingPlugin.MCVersion(RPIntegration.MC_VERSION)
 @IFMLLoadingPlugin.Name(RPIntegration.NAME)
+@IFMLLoadingPlugin.TransformerExclusions("com.therandomlabs.randompatches.integration.core")
 public class RPICore implements IFMLLoadingPlugin {
 	private static boolean initialized;
 	private static File modFile;
 
 	@Override
 	public String[] getASMTransformerClass() {
-		if(!initialized) {
+		if (!initialized) {
 			RPIntegration.init();
 			initialized = true;
 		}

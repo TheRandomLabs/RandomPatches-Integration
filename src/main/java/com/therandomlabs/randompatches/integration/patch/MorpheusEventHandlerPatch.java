@@ -17,13 +17,13 @@ public final class MorpheusEventHandlerPatch extends Patch {
 		final InsnList instructions = findInstructions(node, "bedClicked");
 		LdcInsnNode messageString = null;
 
-		for(int i = 0; i < instructions.size(); i++) {
+		for (int i = 0; i < instructions.size(); i++) {
 			final AbstractInsnNode instruction = instructions.get(i);
 
-			if(instruction.getOpcode() == Opcodes.LDC) {
+			if (instruction.getOpcode() == Opcodes.LDC) {
 				messageString = (LdcInsnNode) instruction;
 
-				if(References.SPAWN_SET.equals(messageString.cst)) {
+				if (References.SPAWN_SET.equals(messageString.cst)) {
 					messageString.cst = RPIConfig.Misc.morpheusSetSpawnMessage;
 					break;
 				}

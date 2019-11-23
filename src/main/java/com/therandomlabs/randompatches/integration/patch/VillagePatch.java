@@ -47,8 +47,8 @@ public final class VillagePatch extends Patch {
 
 			final EnumFacing facing = village.getCoordBaseMode();
 
-			if(facing != null && (maxX - minX + 1 != 8 || maxZ - minZ + 1 != 8)) {
-				switch(facing) {
+			if (facing != null && (maxX - minX + 1 != 8 || maxZ - minZ + 1 != 8)) {
+				switch (facing) {
 				case NORTH:
 					minZ = villageBoundingBox.maxZ;
 					break;
@@ -66,21 +66,21 @@ public final class VillagePatch extends Patch {
 				i = -4;
 			}
 
-			if((facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH)) {
+			if ((facing == EnumFacing.NORTH || facing == EnumFacing.SOUTH)) {
 				minX += Math.min(2, ((maxX - minX) / 2) - 1);
 				maxX -= Math.min(2, ((maxX - minX) / 2) - 1);
-			} else if((facing == EnumFacing.EAST || facing == EnumFacing.WEST)) {
+			} else if ((facing == EnumFacing.EAST || facing == EnumFacing.WEST)) {
 				minZ += Math.min(2, ((maxZ - minZ) / 2) - 1);
 				maxZ -= Math.min(2, ((maxZ - minZ) / 2) - 1);
 			}
 
 			final BlockPos.MutableBlockPos currentBlock = new BlockPos.MutableBlockPos();
 
-			for(int x = minX; x <= maxX; x++) {
-				for(int z = minZ; z <= maxZ; z++) {
+			for (int x = minX; x <= maxX; x++) {
+				for (int z = minZ; z <= maxZ; z++) {
 					int y = world.provider.getAverageGroundLevel() - 2;
 
-					if(!(x >= villageBoundingBox.minX && x <= villageBoundingBox.maxX &&
+					if (!(x >= villageBoundingBox.minX && x <= villageBoundingBox.maxX &&
 							z >= villageBoundingBox.minZ && z <= villageBoundingBox.maxZ)) {
 						final StructureBoundingBox chunkBoundingBox =
 								new StructureBoundingBox(x & ~15, z & ~15, x | 15, z | 15);
@@ -91,18 +91,18 @@ public final class VillagePatch extends Patch {
 
 						final int height = found == null ? -1 : getHeight(found, x, z);
 
-						if(height != -1) {
+						if (height != -1) {
 							y = Math.max(y, height);
 						} else {
 							BlockPos topBlock =
 									MuonUtils.getTopSolidOrLiquidBlock(world, currentBlock);
 							Block block = world.getBlockState(topBlock).getBlock();
 
-							while(block == Blocks.AIR) {
+							while (block == Blocks.AIR) {
 								topBlock = topBlock.down();
 
 								//This is our patch
-								if(topBlock.getY() < 0) {
+								if (topBlock.getY() < 0) {
 									break;
 								}
 
@@ -115,15 +115,15 @@ public final class VillagePatch extends Patch {
 						i += y;
 						j++;
 
-						if(minY == -1 || y < minY) {
+						if (minY == -1 || y < minY) {
 							minY = y;
 						}
 					}
 				}
 			}
 
-			if(j > 0) {
-				if(i / j >= minY + 1) {
+			if (j > 0) {
+				if (i / j >= minY + 1) {
 					return minY + 1;
 				}
 
@@ -136,7 +136,7 @@ public final class VillagePatch extends Patch {
 		private static int getHeight(MuonHeightMap heightMap, int x, int z) {
 			try {
 				return (int) GET_HEIGHT.invoke(heightMap, x, z);
-			} catch(IllegalAccessException | InvocationTargetException ignored) {}
+			} catch (IllegalAccessException | InvocationTargetException ignored) {}
 
 			return -1;
 		}
@@ -147,13 +147,13 @@ public final class VillagePatch extends Patch {
 		final InsnList instructions =
 				findInstructions(classNode, "getAverageGroundLevel", "func_74889_b");
 
-		for(int i = 0; i < instructions.size(); i++) {
+		for (int i = 0; i < instructions.size(); i++) {
 			final AbstractInsnNode instruction = instructions.get(i);
 
-			if(instruction.getOpcode() == Opcodes.INVOKESTATIC) {
+			if (instruction.getOpcode() == Opcodes.INVOKESTATIC) {
 				final MethodInsnNode method = (MethodInsnNode) instruction;
 
-				if("gd/izno/mc/muon/MuonHooks".equals(method.owner)) {
+				if ("gd/izno/mc/muon/MuonHooks".equals(method.owner)) {
 					method.owner = getName(VillagePatch.class) + "$Hook";
 					break;
 				}

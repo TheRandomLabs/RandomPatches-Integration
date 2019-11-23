@@ -16,11 +16,12 @@ buildscript {
 apply plugin: "net.minecraftforge.gradle.forge"
 apply plugin: "com.github.johnrengelman.shadow"
 
-version = "1.12.2-1.5.1.0"
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+version = "1.12.2-1.5.2.0"
 group = "com.therandomlabs.randompatches.integration"
 archivesBaseName = "rpintegration"
-
-sourceCompatibility = targetCompatibility = "1.8"
 
 repositories {
 	maven {
@@ -35,8 +36,8 @@ repositories {
 dependencies {
 	shadow "com.github.TheRandomLabs:RandomLib:1.12-SNAPSHOT"
 	compile "com.github.TheRandomLabs:RandomLib:1.12-SNAPSHOT"
-	deobfCompile "randompatches:randompatches:1.12.2:1.17.2.0"
-	//Apparently doesn't work:
+	deobfCompile "randompatches:randompatches:1.12.2:1.20.1.0"
+	//Doesn't work for some reason:
 	//deobfCompile "morpheus:Morpheus:1.12.2:3.5.106"
 	deobfCompile "muon:muon:0.2:1.12"
 }
@@ -60,7 +61,7 @@ artifacts {
 }
 
 minecraft {
-	version = "1.12.2-14.23.5.2838"
+	version = "1.12.2-14.23.5.2847"
 	runDir = "run"
 	mappings = "stable_39"
 
